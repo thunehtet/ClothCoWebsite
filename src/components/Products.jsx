@@ -1,0 +1,146 @@
+import { useEffect, useState } from 'react'
+import styles from './Products.module.css'
+import { getProducts } from '../api/storefront'
+import { useLanguage } from '../i18n/LanguageContext'
+import { useTenant } from '../TenantContext'
+
+function formatPrice(p, currency) {
+  const fmt = new Intl.NumberFormat('en-US')
+  const label = p.minPrice === p.maxPrice
+    ? fmt.format(p.minPrice)
+    : `${fmt.format(p.minPrice)}–${fmt.format(p.maxPrice)}`
+  return { label, currency: currency ?? '' }
+}
+
+function ProductCard({ p, currency, viewLabel }) {
+  const { label, currency: cur } = formatPrice(p, currency)
+  return (
+    <a
+      className={styles.card}
+      href={p.shopUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <div className={styles.imageWrap}>
+        {p.imageUrl ? (
+          <img
+            src={p.thumbnailUrl ?? p.imageUrl}
+            alt={p.name}
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <div className={styles.imagePlaceholder} aria-hidden="true" />
+        )}
+        <span className={styles.viewBadge} aria-hidden="true">
+          {viewLabel}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+          </svg>
+        </span>
+      </div>
+      <div className={styles.body}>
+        {p.category && <span className={styles.category}>{p.category}</span>}
+        <h3 className={styles.name}>{p.name}</h3>
+        <span className={styles.price}>
+          <span className={styles.priceValue}>{label}</span>
+          {cur && <span className={styles.priceCurrency}>{cur}</span>}
+        </span>
+      </div>
+    </a>
+  )
+}
+
+export default function Products() {
+  const { t } = useLanguage()
+  const { tenant } = useTenant()
+  const [items, setItems] = useState([])
+  const [status, setStatus] = useState('loading')
+
+  useEffect(() => {
+    let cancelled = false
+    getProducts({ limit: 6 })
+      .then(data => {
+        if (cancelled) return
+        setItems(data)
+        setStatus('ready')
+      })
+      .catch(() => {
+        if (cancelled) return
+        setStatus('error')
+      })
+    return () => { cancelled = true }
+  }, [])
+
+  return (
+    <section id="products" className={styles.section}>
+      <div className={styles.container}>
+        <header className={styles.header}>
+          <div className={styles.headingGroup}>
+            <p className={styles.eyebrow}>
+              <span className={styles.eyebrowMark} aria-hidden="true" />
+              {t('products.eyebrow')}
+            </p>
+            <h2 className={styles.title}>{t('products.title')}</h2>
+          </div>
+          {tenant?.shopUrl && status === 'ready' && items.length > 0 && (
+            <a
+              href={tenant.shopUrl}
+              className={styles.headerLink}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t('products.viewAll')}
+              <span aria-hidden="true">→</span>
+            </a>
+          )}
+        </header>
+
+        {status === 'loading' && (
+          <div className={styles.grid}>
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className={styles.skeleton}>
+                <div className={styles.skeletonImage} />
+                <div className={styles.skeletonLine} style={{ width: '40%' }} />
+                <div className={styles.skeletonLine} style={{ width: '75%' }} />
+                <div className={styles.skeletonLine} style={{ width: '30%' }} />
+              </div>
+            ))}
+          </div>
+        )}
+        {status === 'error' && (
+          <p className={styles.note}>{t('products.error')}</p>
+        )}
+        {status === 'ready' && items.length === 0 && (
+          <p className={styles.note}>{t('products.empty')}</p>
+        )}
+        {status === 'ready' && items.length > 0 && (
+          <div className={styles.grid}>
+            {items.map(p => (
+              <ProductCard
+                key={p.id}
+                p={p}
+                currency={tenant?.currency}
+                viewLabel={t('products.view')}
+              />
+            ))}
+          </div>
+        )}
+
+        {tenant?.shopUrl && status === 'ready' && items.length > 0 && (
+          <div className={styles.footer}>
+            <a
+              href={tenant.shopUrl}
+              className={styles.viewAll}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t('products.viewAll')}
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}

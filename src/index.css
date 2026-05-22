@@ -1,0 +1,107 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Surfaces — warm, paper-like, slightly desaturated */
+  --paper:       #F4EFE6;
+  --paper-soft:  #ECE5D7;
+  --paper-deep:  #E3DACA;
+  --ivory:       #F8F4EC;
+  --warm-white:  #FBF7F0;
+
+  /* Ink — softer than pure black, reads as editorial */
+  --ink:         #1F1A14;
+  --ink-mid:     #4A3F33;
+  --ink-soft:    #7B6E5D;
+  --ink-faint:   #A89B86;
+
+  /* Brand accent — deep botanical green */
+  --accent:       #2B5544;
+  --accent-hover: #1F4233;
+  --accent-soft:  #D9E3DC;
+  --accent-pale:  #EBF1EC;
+
+  /* Secondary tone — earthen terracotta for tiny accents only */
+  --clay:         #B5664A;
+  --clay-soft:    #E9D2C5;
+
+  /* Lines & shadows */
+  --rule:        #D9CFBC;
+  --rule-soft:   #E8E0CF;
+  --shadow-sm:   0 1px 2px rgba(31,26,20,0.04);
+  --shadow-md:   0 8px 30px rgba(31,26,20,0.06);
+  --shadow-lg:   0 20px 60px rgba(31,26,20,0.10);
+
+  /* Typography stacks */
+  --font-display: 'Fraunces', 'Noto Sans Myanmar', ui-serif, Georgia, serif;
+  --font-body:    'DM Sans', 'Noto Sans Myanmar', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* Storefront handshake — kept for parity with StockEasy shop CSS */
+  --forest:      #1F4233;
+  --gold:        #BF9B5E;
+  --border:      var(--rule);
+  --border-dark: #C8BFB2;
+}
+
+/* Burmese: prefer Myanmar font for headings too, since Fraunces has no MM glyphs */
+html[lang='my'] {
+  --font-display: 'Noto Sans Myanmar', 'Fraunces', ui-serif, Georgia, serif;
+  --font-body:    'Noto Sans Myanmar', 'DM Sans', system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--warm-white);
+  color: var(--ink);
+  line-height: 1.65;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.1;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  font-variation-settings: 'opsz' 96, 'SOFT' 50;
+}
+
+/* Burmese needs a touch more line-height and slightly heavier weight to feel right */
+html[lang='my'] h1,
+html[lang='my'] h2,
+html[lang='my'] h3,
+html[lang='my'] h4 {
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+html[lang='my'] body {
+  line-height: 1.75;
+}
+
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  font-family: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--warm-white);
+}

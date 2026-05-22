@@ -1,0 +1,285 @@
+.hero {
+  background: var(--warm-white);
+  padding: 9rem 0 6.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 15% 10%, rgba(43, 85, 68, 0.04), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 85% 90%, rgba(181, 102, 74, 0.04), transparent 60%);
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 5rem;
+  align-items: center;
+}
+
+/* No tenant photo + no products yet → text-only centred hero */
+.heroNoImage .inner {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 860px;
+  text-align: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.heroNoImage .content {
+  align-items: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.heroNoImage .eyebrow,
+.heroNoImage .actions { justify-content: center; }
+
+.heroNoImage .subtitle { margin: 0 auto; }
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.85rem;
+  max-width: 560px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.eyebrowMark {
+  width: 28px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.title {
+  font-size: clamp(2.6rem, 5.2vw, 4.2rem);
+  color: var(--ink);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  margin: 0;
+  font-variation-settings: 'opsz' 144, 'SOFT' 30;
+}
+
+.title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+  font-variation-settings: 'opsz' 144, 'SOFT' 100;
+}
+
+html[lang='my'] .title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.4;
+}
+
+html[lang='my'] .title em {
+  font-style: normal;
+  font-weight: 600;
+}
+
+.subtitle {
+  font-size: 1.08rem;
+  color: var(--ink-mid);
+  line-height: 1.7;
+  margin: 0;
+  max-width: 480px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+.btnPrimary {
+  background: var(--ink);
+  color: var(--warm-white);
+  padding: 1rem 2rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+  box-shadow: var(--shadow-sm);
+}
+
+.btnPrimary:hover {
+  background: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btnGhost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--ink-mid);
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--ink-faint);
+  transition: color 0.2s, border-color 0.2s, gap 0.25s;
+}
+
+.btnGhost:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+  gap: 0.85rem;
+}
+
+.visual {
+  margin: 0;
+  position: relative;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   Gallery — editorial 1/2/3-up collage that fits the hero visual slot
+   ────────────────────────────────────────────────────────────────── */
+.gallery {
+  display: grid;
+  gap: 0.75rem;
+  position: relative;
+  transform: translateY(0.5rem);
+}
+
+.tile {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: var(--paper-soft);
+  border-radius: 3px;
+  box-shadow: var(--shadow-md);
+}
+
+.tile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(31, 26, 20, 0.06);
+  border-radius: 3px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tile:hover img { transform: scale(1.04); }
+
+/* Single — one tall portrait (original behaviour, kept as fallback) */
+.gallerySingle {
+  grid-template-columns: 1fr;
+  aspect-ratio: 4 / 5;
+}
+
+.gallerySingle .tile {
+  box-shadow: var(--shadow-lg);
+}
+
+/* Double — primary left, secondary right slightly offset upward */
+.galleryDouble {
+  grid-template-columns: 1.35fr 1fr;
+  grid-template-rows: auto auto;
+  align-items: stretch;
+  aspect-ratio: 5 / 6;
+}
+
+.galleryDouble .tile1 {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+.galleryDouble .tile2 {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  aspect-ratio: 4 / 5;
+}
+
+/* Triple — primary tall on left, two stacked on right (most editorial) */
+.galleryTriple {
+  grid-template-columns: 1.45fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  aspect-ratio: 1 / 1.08;
+}
+
+.galleryTriple .tile1 {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  box-shadow: var(--shadow-lg);
+}
+
+.galleryTriple .tile2 {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.galleryTriple .tile3 {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.caption {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.captionRule {
+  width: 36px;
+  height: 1px;
+  background: var(--ink-faint);
+}
+
+@media (max-width: 860px) {
+  .hero { padding: 6rem 0 4rem; }
+  .inner {
+    grid-template-columns: 1fr;
+    padding: 0 1.25rem;
+    gap: 3rem;
+  }
+  .visual { order: -1; }
+  .gallery { transform: none; gap: 0.5rem; }
+  .gallerySingle { aspect-ratio: 4 / 3; }
+  .galleryDouble { aspect-ratio: 5 / 4; }
+  .galleryTriple { aspect-ratio: 5 / 4; }
+  .actions { gap: 1.25rem; }
+  .btnPrimary { padding: 0.9rem 1.75rem; }
+}
