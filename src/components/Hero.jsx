@@ -1,32 +1,14 @@
-import { useEffect, useState } from 'react'
 import styles from './Hero.module.css'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useTenant } from '../TenantContext'
-import { getProducts } from '../api/storefront'
+import { COLLECTION_PHOTOS } from '../data/collectionPhotos'
 
 export default function Hero() {
   const { t } = useLanguage()
   const { tenant } = useTenant()
   const shopHref = tenant?.shopUrl ?? '#products'
 
-  // Source hero imagery from the first few products. Both this fetch and
-  // the Products section's fetch hit the same /products endpoint which is
-  // cached server-side (ResponseCache 60s) so it's effectively free.
-  const [gallery, setGallery] = useState([])
-
-  useEffect(() => {
-    let cancelled = false
-    getProducts({ limit: 3 })
-      .then(items => {
-        if (cancelled) return
-        const withImages = (Array.isArray(items) ? items : [])
-          .filter(p => p.imageUrl)
-          .slice(0, 3)
-        setGallery(withImages)
-      })
-      .catch(() => { /* leave gallery empty → visual slot hides */ })
-    return () => { cancelled = true }
-  }, [])
+  const gallery = COLLECTION_PHOTOS
 
   const hasGallery = gallery.length > 0
   const galleryVariant =

@@ -3,6 +3,7 @@ import styles from './Products.module.css'
 import { getProducts } from '../api/storefront'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useTenant } from '../TenantContext'
+import { collectionPhotoFor } from '../data/collectionPhotos'
 
 function formatPrice(p, currency) {
   const fmt = new Intl.NumberFormat('en-US')
@@ -12,8 +13,9 @@ function formatPrice(p, currency) {
   return { label, currency: currency ?? '' }
 }
 
-function ProductCard({ p, currency, viewLabel }) {
+function ProductCard({ p, currency, viewLabel, imageFallback }) {
   const { label, currency: cur } = formatPrice(p, currency)
+  const imageSrc = p.thumbnailUrl ?? p.imageUrl ?? imageFallback
   return (
     <a
       className={styles.card}
@@ -22,16 +24,12 @@ function ProductCard({ p, currency, viewLabel }) {
       rel="noopener noreferrer"
     >
       <div className={styles.imageWrap}>
-        {p.imageUrl ? (
-          <img
-            src={p.thumbnailUrl ?? p.imageUrl}
-            alt={p.name}
-            loading="lazy"
-            decoding="async"
-          />
-        ) : (
-          <div className={styles.imagePlaceholder} aria-hidden="true" />
-        )}
+        <img
+          src={imageSrc}
+          alt={p.name}
+          loading="lazy"
+          decoding="async"
+        />
         <span className={styles.viewBadge} aria-hidden="true">
           {viewLabel}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
@@ -116,12 +114,13 @@ export default function Products() {
         )}
         {status === 'ready' && items.length > 0 && (
           <div className={styles.grid}>
-            {items.map(p => (
+            {items.map((p, i) => (
               <ProductCard
                 key={p.id}
                 p={p}
                 currency={tenant?.currency}
                 viewLabel={t('products.view')}
+                imageFallback={collectionPhotoFor(i).imageUrl}
               />
             ))}
           </div>

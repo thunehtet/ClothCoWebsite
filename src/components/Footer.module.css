@@ -46,7 +46,6 @@
   width: auto;
   max-width: 200px;
   object-fit: contain;
-  filter: brightness(0) invert(1);
   opacity: 0.95;
 }
 
