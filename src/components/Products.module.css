@@ -294,9 +294,91 @@ html[lang='my'] .name {
 }
 
 @media (max-width: 600px) {
-  .section { padding: 4.5rem 0; }
-  .container { padding: 0 1.25rem; }
-  .grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  .header { flex-direction: column; align-items: flex-start; }
-  .viewBadge { opacity: 1; transform: translate(-50%, 0); }
+  .section { padding: 4rem 0; }
+  .container { padding: 0 1rem; }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.1rem;
+  }
+
+  .headingGroup { gap: 0.55rem; }
+  .title { font-size: clamp(1.65rem, 8vw, 2.05rem); }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.65rem 0.85rem;
+  }
+
+  .imageWrap {
+    margin-bottom: 0.8rem;
+    border-radius: 4px;
+  }
+
+  .imageWrap::after {
+    border-radius: 4px;
+  }
+
+  .body {
+    gap: 0.25rem;
+    padding: 0;
+  }
+
+  .category {
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    line-height: 1.25;
+  }
+
+  .name {
+    font-size: 0.96rem;
+    line-height: 1.28;
+  }
+
+  html[lang='my'] .name {
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .price {
+    gap: 0.25rem;
+    margin-top: 0.1rem;
+    flex-wrap: wrap;
+  }
+
+  .priceValue { font-size: 0.84rem; }
+  .priceCurrency { font-size: 0.62rem; letter-spacing: 0.08em; }
+
+  .viewBadge {
+    left: auto;
+    right: 0.45rem;
+    bottom: 0.45rem;
+    transform: none;
+    opacity: 1;
+    padding: 0.35rem 0.5rem;
+    gap: 0.3rem;
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+  }
+
+  .viewBadge svg {
+    width: 10px;
+    height: 10px;
+  }
+
+  .card:hover .viewBadge {
+    transform: none;
+  }
+
+  .footer { margin-top: 2.75rem; }
+  .viewAll { width: 100%; justify-content: center; padding: 0.78rem 1rem; }
+}
+
+@media (max-width: 340px) {
+  .grid { gap: 1.4rem 0.65rem; }
+  .container { padding: 0 0.8rem; }
+  .viewBadge { display: none; }
 }

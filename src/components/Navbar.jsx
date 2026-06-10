@@ -7,6 +7,7 @@ const NAV_KEYS = [
   { key: 'nav.home',     href: '#home' },
   { key: 'nav.products', href: '#products' },
   { key: 'nav.about',    href: '#about' },
+  { key: 'nav.faq',      href: '#faq' },
   { key: 'nav.contact',  href: '#contact' },
 ]
 
