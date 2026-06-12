@@ -33,8 +33,25 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handler)
   }, [])
 
+  useEffect(() => {
+    if (!menuOpen) return undefined
+
+    const previousOverflow = document.body.style.overflow
+    const handleKeyDown = event => {
+      if (event.key === 'Escape') setMenuOpen(false)
+    }
+
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [menuOpen])
+
   return (
-    <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
+    <header className={`${styles.header} ${scrolled ? styles.scrolled : ''} ${menuOpen ? styles.menuOpen : ''}`}>
       <div className={styles.inner}>
         <a href="#home" className={styles.logo} aria-label={brandName}>
           {logoUrl ? (
@@ -51,7 +68,10 @@ export default function Navbar() {
           <span className={styles.logoText}>{brandName}</span>
         </a>
 
-        <nav className={`${styles.nav} ${menuOpen ? styles.open : ''}`}>
+        <nav
+          id="primary-navigation"
+          className={`${styles.nav} ${menuOpen ? styles.open : ''}`}
+        >
           {NAV_KEYS.map(({ key, href }) => (
             <a
               key={key}
@@ -99,7 +119,9 @@ export default function Navbar() {
         <button
           className={styles.burger}
           onClick={() => setMenuOpen(o => !o)}
-          aria-label="Toggle menu"
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
+          aria-controls="primary-navigation"
         >
           <span className={menuOpen ? styles.lineTop : ''}></span>
           <span className={menuOpen ? styles.lineHide : ''}></span>

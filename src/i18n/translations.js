@@ -24,6 +24,7 @@ export const translations = {
     'products.empty': 'New pieces are on the way. Check back soon.',
     'products.loading': 'Loading the collection…',
     'products.error': 'We couldn’t load the collection right now.',
+    'products.retry': 'Retry',
     'products.view': 'View',
 
     'services.eyebrow': 'How it works',
@@ -85,6 +86,7 @@ export const translations = {
     'products.empty': 'ပစ္စည်းအသစ်တွေ မကြာခင် ရောက်လာပါမယ်။',
     'products.loading': 'ပစ္စည်းတွေ တင်နေပါတယ်…',
     'products.error': 'ပစ္စည်းတွေကို ခဏတင်မရသေးပါ။',
+    'products.retry': 'ထပ်ကြိုးစားမယ်',
     'products.view': 'ကြည့်မယ်',
 
     'services.eyebrow': 'မှာယူပုံ',

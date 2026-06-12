@@ -9,8 +9,7 @@ function detectInitial() {
   if (typeof window === 'undefined') return 'my'
   const stored = window.localStorage.getItem(STORAGE_KEY)
   if (stored && SUPPORTED.includes(stored)) return stored
-  const browser = window.navigator.language?.toLowerCase() ?? ''
-  return browser.startsWith('my') ? 'my' : 'en'
+  return 'my'
 }
 
 export function LanguageProvider({ children }) {

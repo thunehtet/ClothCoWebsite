@@ -63,7 +63,10 @@ export default function Hero() {
                   <img
                     src={p.thumbnailUrl ?? p.imageUrl}
                     alt={p.name}
+                    width={p.width}
+                    height={p.height}
                     loading={i === 0 ? 'eager' : 'lazy'}
+                    fetchPriority={i === 0 ? 'high' : 'auto'}
                     decoding="async"
                   />
                 </a>

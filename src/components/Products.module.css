@@ -89,6 +89,31 @@ html[lang='my'] .title {
   text-align: center;
 }
 
+.note p {
+  margin: 0 0 1.25rem;
+}
+
+.retry {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0.65rem 1.35rem;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  color: var(--ink);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background 0.25s, color 0.25s, border-color 0.25s;
+}
+
+.retry:hover {
+  background: var(--ink);
+  color: var(--warm-white);
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -377,8 +402,11 @@ html[lang='my'] .name {
   .viewAll { width: 100%; justify-content: center; padding: 0.78rem 1rem; }
 }
 
-@media (max-width: 340px) {
-  .grid { gap: 1.4rem 0.65rem; }
+@media (max-width: 380px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
   .container { padding: 0 0.8rem; }
   .viewBadge { display: none; }
 }

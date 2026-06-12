@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import styles from './Products.module.css'
 import { getProducts } from '../api/storefront'
 import { useLanguage } from '../i18n/LanguageContext'
@@ -54,9 +54,15 @@ export default function Products() {
   const { tenant } = useTenant()
   const [items, setItems] = useState([])
   const [status, setStatus] = useState('loading')
+  const [requestVersion, setRequestVersion] = useState(0)
+
+  const loadProducts = useCallback(() => {
+    setRequestVersion(v => v + 1)
+  }, [])
 
   useEffect(() => {
     let cancelled = false
+    setStatus('loading')
     getProducts({ limit: 6 })
       .then(data => {
         if (cancelled) return
@@ -65,10 +71,11 @@ export default function Products() {
       })
       .catch(() => {
         if (cancelled) return
+        setItems([])
         setStatus('error')
       })
     return () => { cancelled = true }
-  }, [])
+  }, [requestVersion])
 
   return (
     <section id="products" className={styles.section}>
@@ -107,7 +114,12 @@ export default function Products() {
           </div>
         )}
         {status === 'error' && (
-          <p className={styles.note}>{t('products.error')}</p>
+          <div className={styles.note}>
+            <p>{t('products.error')}</p>
+            <button className={styles.retry} type="button" onClick={loadProducts}>
+              {t('products.retry')}
+            </button>
+          </div>
         )}
         {status === 'ready' && items.length === 0 && (
           <p className={styles.note}>{t('products.empty')}</p>

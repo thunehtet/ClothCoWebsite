@@ -16,6 +16,13 @@
   padding: 0.85rem 0;
 }
 
+.menuOpen {
+  background: var(--warm-white);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom-color: var(--rule-soft);
+}
+
 .inner {
   max-width: 1280px;
   margin: 0 auto;
@@ -203,14 +210,31 @@ html[lang='my'] .scrolled .logoText { font-size: 1.2rem; }
 .lineBottom { transform: translateY(-6.5px) rotate(-45deg); }
 
 @media (max-width: 860px) {
-  .inner { padding: 0 1.25rem; }
+  .header {
+    padding: 0.85rem 0;
+  }
+
+  .inner {
+    min-height: 48px;
+    padding: 0 1.25rem;
+  }
+
+  .logo {
+    min-height: 48px;
+  }
+
   .burger { display: flex; }
 
   .nav {
     position: fixed;
-    inset: 0;
-    top: 64px;
+    z-index: 99;
+    top: 65px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    min-height: calc(100dvh - 65px);
     background: var(--warm-white);
+    overflow-y: auto;
     flex-direction: column;
     justify-content: center;
     gap: 2.5rem;

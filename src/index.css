@@ -101,6 +101,14 @@ button {
   color: inherit;
 }
 
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
 ::selection {
   background: var(--accent);
   color: var(--warm-white);
