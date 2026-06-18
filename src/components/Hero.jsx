@@ -26,7 +26,7 @@ export default function Hero() {
           </p>
 
           <h1 className={styles.title}>
-            {t('hero.title.line1')}<br />
+            <span>{t('hero.title.line1')}</span><br />
             <em>{t('hero.title.line2')}</em>
           </h1>
 
