@@ -308,6 +308,10 @@ html[lang='my'] .name {
   border-radius: 2px;
 }
 
+.skeletonLineSm { width: 30%; }
+.skeletonLineMd { width: 40%; }
+.skeletonLineLg { width: 75%; }
+
 @keyframes shimmer {
   0%   { background-position: 200% 0; }
   100% { background-position: -200% 0; }

@@ -1,6 +1,7 @@
 import styles from './Footer.module.css'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useTenant } from '../TenantContext'
+import { safeUrl } from '../utils/safeUrl'
 
 function initialsFrom(name) {
   if (!name) return 'CC'
@@ -71,7 +72,7 @@ export default function Footer() {
                 <ul className={styles.list}>
                   <li>
                     <a
-                      href={tenant.facebookUrl}
+                      href={safeUrl(tenant.facebookUrl)}
                       className={styles.link}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -87,7 +88,7 @@ export default function Footer() {
               <div className={styles.col}>
                 <h4 className={styles.colTitle}>{t('nav.shop')}</h4>
                 <a
-                  href={tenant.shopUrl}
+                  href={safeUrl(tenant.shopUrl)}
                   className={styles.shopBtn}
                   target="_blank"
                   rel="noopener noreferrer"

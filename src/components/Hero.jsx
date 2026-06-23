@@ -2,11 +2,12 @@ import styles from './Hero.module.css'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useTenant } from '../TenantContext'
 import { COLLECTION_PHOTOS } from '../data/collectionPhotos'
+import { safeUrl, isExternal } from '../utils/safeUrl'
 
 export default function Hero() {
   const { t } = useLanguage()
   const { tenant } = useTenant()
-  const shopHref = tenant?.shopUrl ?? '#products'
+  const shopHref = safeUrl(tenant?.shopUrl ?? '#products', '#products')
 
   const gallery = COLLECTION_PHOTOS
 
@@ -36,8 +37,8 @@ export default function Hero() {
             <a
               href={shopHref}
               className={styles.btnPrimary}
-              target={shopHref.startsWith('http') ? '_blank' : undefined}
-              rel={shopHref.startsWith('http') ? 'noopener noreferrer' : undefined}
+              target={isExternal(shopHref) ? '_blank' : undefined}
+              rel={isExternal(shopHref) ? 'noopener noreferrer' : undefined}
             >
               {t('hero.cta.shop')}
             </a>
@@ -54,8 +55,8 @@ export default function Hero() {
               {gallery.map((p, i) => (
                 <a
                   key={p.id}
-                  href={p.shopUrl ?? shopHref}
-                  target={(p.shopUrl ?? shopHref).startsWith('http') ? '_blank' : undefined}
+                  href={safeUrl(p.shopUrl ?? shopHref, shopHref)}
+                  target={isExternal(p.shopUrl ?? shopHref) ? '_blank' : undefined}
                   rel="noopener noreferrer"
                   className={`${styles.tile} ${styles[`tile${i + 1}`]}`}
                   aria-label={p.name}

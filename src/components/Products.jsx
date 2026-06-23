@@ -4,6 +4,7 @@ import { getProducts } from '../api/storefront'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useTenant } from '../TenantContext'
 import { collectionPhotoFor } from '../data/collectionPhotos'
+import { safeUrl } from '../utils/safeUrl'
 
 function formatPrice(p, currency) {
   const fmt = new Intl.NumberFormat('en-US')
@@ -19,7 +20,7 @@ function ProductCard({ p, currency, viewLabel, imageFallback }) {
   return (
     <a
       className={styles.card}
-      href={p.shopUrl}
+      href={safeUrl(p.shopUrl)}
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -90,7 +91,7 @@ export default function Products() {
           </div>
           {tenant?.shopUrl && status === 'ready' && items.length > 0 && (
             <a
-              href={tenant.shopUrl}
+              href={safeUrl(tenant.shopUrl)}
               className={styles.headerLink}
               target="_blank"
               rel="noopener noreferrer"
@@ -106,9 +107,9 @@ export default function Products() {
             {Array.from({ length: 6 }).map((_, i) => (
               <div key={i} className={styles.skeleton}>
                 <div className={styles.skeletonImage} />
-                <div className={styles.skeletonLine} style={{ width: '40%' }} />
-                <div className={styles.skeletonLine} style={{ width: '75%' }} />
-                <div className={styles.skeletonLine} style={{ width: '30%' }} />
+                <div className={`${styles.skeletonLine} ${styles.skeletonLineMd}`} />
+                <div className={`${styles.skeletonLine} ${styles.skeletonLineLg}`} />
+                <div className={`${styles.skeletonLine} ${styles.skeletonLineSm}`} />
               </div>
             ))}
           </div>
@@ -141,7 +142,7 @@ export default function Products() {
         {tenant?.shopUrl && status === 'ready' && items.length > 0 && (
           <div className={styles.footer}>
             <a
-              href={tenant.shopUrl}
+              href={safeUrl(tenant.shopUrl)}
               className={styles.viewAll}
               target="_blank"
               rel="noopener noreferrer"

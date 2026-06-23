@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import styles from './Navbar.module.css'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useTenant } from '../TenantContext'
+import { safeUrl, isExternal } from '../utils/safeUrl'
 
 const NAV_KEYS = [
   { key: 'nav.home',     href: '#home' },
@@ -23,7 +24,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const { t, lang, setLang } = useLanguage()
   const { tenant } = useTenant()
-  const shopHref = tenant?.shopUrl ?? '#products'
+  const shopHref = safeUrl(tenant?.shopUrl ?? '#products', '#products')
   const brandName = tenant?.name ?? 'ClothCo'
   const logoUrl = tenant?.logoUrl
 
@@ -104,8 +105,8 @@ export default function Navbar() {
             href={shopHref}
             className={styles.cta}
             onClick={() => setMenuOpen(false)}
-            target={shopHref.startsWith('http') ? '_blank' : undefined}
-            rel={shopHref.startsWith('http') ? 'noopener noreferrer' : undefined}
+            target={isExternal(shopHref) ? '_blank' : undefined}
+            rel={isExternal(shopHref) ? 'noopener noreferrer' : undefined}
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
