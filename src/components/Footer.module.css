@@ -122,8 +122,8 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.65rem 1.2rem;
-  background: rgba(251, 247, 240, 0.08);
-  border: 1px solid rgba(251, 247, 240, 0.12);
+  background: var(--clay);
+  border: 1px solid var(--clay);
   color: var(--warm-white);
   font-size: 0.75rem;
   font-weight: 600;
@@ -135,8 +135,8 @@
 }
 
 .shopBtn:hover {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: var(--clay-hover);
+  border-color: var(--clay-hover);
   gap: 0.7rem;
 }
 

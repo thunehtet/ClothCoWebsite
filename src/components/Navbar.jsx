@@ -52,6 +52,7 @@ export default function Navbar() {
   }, [menuOpen])
 
   return (
+    <>
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ''} ${menuOpen ? styles.menuOpen : ''}`}>
       <div className={styles.inner}>
         <a href="#home" className={styles.logo} aria-label={brandName}>
@@ -117,18 +118,50 @@ export default function Navbar() {
           </a>
         </nav>
 
-        <button
-          className={styles.burger}
-          onClick={() => setMenuOpen(o => !o)}
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={menuOpen}
-          aria-controls="primary-navigation"
-        >
-          <span className={menuOpen ? styles.lineTop : ''}></span>
-          <span className={menuOpen ? styles.lineHide : ''}></span>
-          <span className={menuOpen ? styles.lineBottom : ''}></span>
-        </button>
+        <div className={styles.mobileActions}>
+          <a
+            href={shopHref}
+            className={styles.ctaCompact}
+            onClick={() => setMenuOpen(false)}
+            target={isExternal(shopHref) ? '_blank' : undefined}
+            rel={isExternal(shopHref) ? 'noopener noreferrer' : undefined}
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+              <path d="M3 6h18"/>
+              <path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+            {t('nav.shop')}
+          </a>
+
+          <button
+            className={styles.burger}
+            onClick={() => setMenuOpen(o => !o)}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+            aria-controls="primary-navigation"
+          >
+            <span className={menuOpen ? styles.lineTop : ''}></span>
+            <span className={menuOpen ? styles.lineHide : ''}></span>
+            <span className={menuOpen ? styles.lineBottom : ''}></span>
+          </button>
+        </div>
       </div>
     </header>
+
+    <a
+      href={shopHref}
+      className={`${styles.bottomBar} ${menuOpen ? styles.bottomBarHidden : ''}`}
+      target={isExternal(shopHref) ? '_blank' : undefined}
+      rel={isExternal(shopHref) ? 'noopener noreferrer' : undefined}
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+        <path d="M3 6h18"/>
+        <path d="M16 10a4 4 0 0 1-8 0"/>
+      </svg>
+      {t('nav.shop')}
+    </a>
+    </>
   )
 }

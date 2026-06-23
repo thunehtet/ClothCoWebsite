@@ -166,7 +166,7 @@ html[lang='my'] .scrolled .logoText { font-size: 1.2rem; }
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: var(--ink);
+  background: var(--clay);
   color: var(--warm-white);
   padding: 0.6rem 1.15rem;
   font-size: 0.78rem;
@@ -184,10 +184,61 @@ html[lang='my'] .scrolled .logoText { font-size: 1.2rem; }
 }
 
 .cta:hover {
-  background: var(--accent);
+  background: var(--clay-hover);
   color: var(--warm-white);
   transform: translateY(-1px);
 }
+
+/* Wraps the always-visible mobile shop button + hamburger (hidden on desktop) */
+.mobileActions {
+  display: none;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* Compact terracotta shop button that lives in the top bar on mobile */
+.ctaCompact {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--clay);
+  color: var(--warm-white);
+  padding: 0.5rem 0.95rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  transition: background 0.25s, transform 0.2s;
+}
+
+.ctaCompact svg { width: 15px; height: 15px; stroke-width: 1.7; }
+.ctaCompact:active { transform: scale(0.97); }
+
+/* Full-width shop bar pinned to the bottom of the viewport on mobile */
+.bottomBar {
+  display: none;
+  position: fixed;
+  z-index: 98;
+  left: 0; right: 0; bottom: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 1rem 1.25rem calc(1rem + env(safe-area-inset-bottom));
+  background: var(--clay);
+  color: var(--warm-white);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow: 0 -6px 24px rgba(31, 26, 20, 0.16);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bottomBar svg { width: 18px; height: 18px; stroke-width: 1.7; }
+
+/* Slide the bar away while the drawer is open so it doesn't sit over the menu */
+.bottomBarHidden { transform: translateY(100%); }
 
 .burger {
   display: none;
@@ -224,6 +275,8 @@ html[lang='my'] .scrolled .logoText { font-size: 1.2rem; }
   }
 
   .burger { display: flex; }
+  .mobileActions { display: flex; }
+  .bottomBar { display: flex; }
 
   .nav {
     position: fixed;
@@ -245,6 +298,8 @@ html[lang='my'] .scrolled .logoText { font-size: 1.2rem; }
 
   .nav.open { transform: translateX(0); }
   .link { font-size: 1.1rem; }
-  .cta  { font-size: 0.85rem; padding: 0.85rem 2.5rem; }
+  /* The shop action now lives in the top bar + bottom bar, so hide the
+     redundant copy inside the drawer. */
+  .cta { display: none; }
   .logoImage { height: 32px; }
 }

@@ -24,8 +24,9 @@
   --accent-soft:  #D9E3DC;
   --accent-pale:  #EBF1EC;
 
-  /* Secondary tone — earthen terracotta for tiny accents only */
+  /* Secondary tone — earthen terracotta, now the primary CTA color */
   --clay:         #B5664A;
+  --clay-hover:   #9C5238;
   --clay-soft:    #E9D2C5;
 
   /* Lines & shadows */
@@ -112,4 +113,9 @@ summary:focus-visible {
 ::selection {
   background: var(--accent);
   color: var(--warm-white);
+}
+
+/* Leave room for the pinned mobile shop bar so it never covers footer content */
+@media (max-width: 860px) {
+  body { padding-bottom: 4.75rem; }
 }
