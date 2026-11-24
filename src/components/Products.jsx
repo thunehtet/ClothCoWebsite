@@ -5,6 +5,7 @@ import { useLanguage } from '../i18n/LanguageContext'
 import { useTenant } from '../TenantContext'
 import { collectionPhotoFor } from '../data/collectionPhotos'
 import { safeUrl } from '../utils/safeUrl'
+import { HeartIcon } from './Icons'
 
 function formatPrice(p, currency) {
   const fmt = new Intl.NumberFormat('en-US')
@@ -84,7 +85,7 @@ export default function Products() {
         <header className={styles.header}>
           <div className={styles.headingGroup}>
             <p className={styles.eyebrow}>
-              <span className={styles.eyebrowMark} aria-hidden="true" />
+              <HeartIcon className={styles.eyebrowMark} />
               {t('products.eyebrow')}
             </p>
             <h2 className={styles.title}>{t('products.title')}</h2>

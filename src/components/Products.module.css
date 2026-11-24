@@ -1,13 +1,26 @@
 .section {
-  background: var(--warm-white);
-  padding: 7rem 0;
+  background: var(--surface);
+  padding: 5rem 0 6rem;
   position: relative;
 }
 
+/* Wavy "pajama hem" edge that overlaps the hero above */
+.section::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -30px;
+  height: 31px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 31'%3E%3Cpath fill='%23ffffff' d='M0 31V14c15 0 15 14 30 14s15-14 30-14 15 14 30 14 15-14 30-14v17z'/%3E%3C/svg%3E") repeat-x;
+  background-size: 120px 31px;
+  pointer-events: none;
+}
+
 .container {
-  max-width: 1240px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2.5rem;
+  padding: 0 2rem;
 }
 
 .header {
@@ -15,44 +28,43 @@
   align-items: flex-end;
   justify-content: space-between;
   gap: 2rem;
-  margin-bottom: 4rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--rule-soft);
+  margin-bottom: 2.75rem;
   flex-wrap: wrap;
 }
 
 .headingGroup {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
-  max-width: 560px;
+  align-items: flex-start;
+  gap: 1rem;
+  max-width: 580px;
 }
 
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 0.7rem;
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--ink-soft);
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+  gap: 0.45rem;
+  background: var(--blush);
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 800;
+  padding: 0.4rem 0.95rem;
+  border-radius: 999px;
   margin: 0;
 }
 
 .eyebrowMark {
-  width: 24px;
-  height: 1px;
-  background: var(--accent);
+  width: 14px;
+  height: 14px;
+  color: var(--primary);
 }
 
 .title {
   font-size: clamp(2rem, 3.6vw, 2.8rem);
   color: var(--ink);
-  font-weight: 300;
+  font-weight: 500;
   letter-spacing: -0.02em;
   margin: 0;
-  font-variation-settings: 'opsz' 144;
 }
 
 html[lang='my'] .title {
@@ -64,60 +76,54 @@ html[lang='my'] .title {
 .headerLink {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-mid);
-  padding-bottom: 2px;
-  border-bottom: 1px solid var(--ink-faint);
-  transition: color 0.2s, border-color 0.2s, gap 0.25s;
+  gap: 0.45rem;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--primary);
+  background: var(--bg-alt);
+  padding: 0.6rem 1.15rem;
+  border-radius: 999px;
+  transition: background 0.2s, gap 0.25s;
 }
 
 .headerLink:hover {
-  color: var(--accent);
-  border-color: var(--accent);
+  background: var(--blush);
   gap: 0.7rem;
 }
 
 .note {
   color: var(--ink-soft);
-  font-size: 0.95rem;
-  padding: 4rem 0;
+  font-size: 1rem;
+  padding: 3.5rem 1.5rem;
   margin: 0;
   text-align: center;
+  background: var(--bg-alt);
+  border-radius: var(--radius-lg);
 }
 
-.note p {
-  margin: 0 0 1.25rem;
-}
+.note p { margin: 0 0 1.25rem; }
 
 .retry {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 42px;
-  padding: 0.65rem 1.35rem;
-  border: 1px solid var(--ink);
+  padding: 0.65rem 1.4rem;
   border-radius: 999px;
-  color: var(--ink);
-  font-size: 0.76rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  transition: background 0.25s, color 0.25s, border-color 0.25s;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-size: 0.9rem;
+  font-weight: 800;
+  transition: background 0.25s;
 }
 
-.retry:hover {
-  background: var(--ink);
-  color: var(--warm-white);
-}
+.retry:hover { background: var(--primary-hover); }
 
+/* ── Cards ────────────────────────────────────────────────────── */
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 3.5rem 2.25rem;
+  gap: 1.75rem;
 }
 
 .card {
@@ -125,26 +131,30 @@ html[lang='my'] .title {
   flex-direction: column;
   color: inherit;
   position: relative;
+  padding: 11px;
+  border-radius: var(--radius-lg);
+  background: var(--blush);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
 }
+
+.card:nth-child(4n+2) { background: var(--butter); }
+.card:nth-child(4n+3) { background: var(--mint); }
+.card:nth-child(4n+4) { background: var(--lavender); }
+
+.card:hover {
+  transform: translateY(-6px) rotate(-0.6deg);
+  box-shadow: var(--shadow-md);
+}
+
+.card:nth-child(even):hover { transform: translateY(-6px) rotate(0.6deg); }
 
 .imageWrap {
   aspect-ratio: 4 / 5;
-  background: var(--paper-soft);
+  background: rgba(255, 255, 255, 0.5);
   overflow: hidden;
-  margin-bottom: 1.25rem;
   position: relative;
-  border-radius: 2px;
+  border-radius: var(--radius-md);
   isolation: isolate;
-}
-
-.imageWrap::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border: 1px solid rgba(31, 26, 20, 0.05);
-  border-radius: 2px;
-  pointer-events: none;
-  z-index: 2;
 }
 
 .imageWrap img {
@@ -157,108 +167,100 @@ html[lang='my'] .title {
 
 .card:hover .imageWrap img { transform: scale(1.05); }
 
-.imagePlaceholder {
-  width: 100%;
-  height: 100%;
-  background:
-    radial-gradient(circle at 30% 25%, rgba(43, 85, 68, 0.08), transparent 55%),
-    radial-gradient(circle at 75% 80%, rgba(181, 102, 74, 0.06), transparent 50%),
-    linear-gradient(135deg, var(--paper-soft) 0%, var(--paper-deep) 100%);
-}
-
 .viewBadge {
   position: absolute;
-  left: 50%;
-  bottom: 1rem;
-  transform: translate(-50%, 8px);
+  right: 0.75rem;
+  bottom: 0.75rem;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.55rem 1rem;
-  background: rgba(31, 26, 20, 0.92);
-  color: var(--warm-white);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  gap: 0.4rem;
+  padding: 0.5rem 0.95rem;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--primary);
+  font-size: 0.82rem;
+  font-weight: 800;
   border-radius: 999px;
+  box-shadow: var(--shadow-sm);
   opacity: 0;
+  transform: translateY(6px);
   transition: opacity 0.3s ease, transform 0.3s ease;
   z-index: 3;
-  backdrop-filter: blur(8px);
 }
 
 .viewBadge svg {
   width: 13px;
   height: 13px;
-  stroke-width: 1.8;
+  stroke-width: 2.2;
 }
 
-.card:hover .viewBadge {
+.card:hover .viewBadge,
+.card:focus-visible .viewBadge {
   opacity: 1;
-  transform: translate(-50%, 0);
+  transform: translateY(0);
 }
 
 .body {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  padding: 0 0.15rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'cat   price'
+    'name  price';
+  align-items: center;
+  column-gap: 0.75rem;
+  padding: 0.95rem 0.5rem 0.4rem;
 }
 
 .category {
-  font-size: 0.68rem;
+  grid-area: cat;
+  font-size: 0.76rem;
   color: var(--ink-soft);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  font-weight: 600;
-  margin-bottom: 0.1rem;
+  font-weight: 700;
 }
 
 .name {
+  grid-area: name;
   font-family: var(--font-display);
   font-size: 1.2rem;
   color: var(--ink);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.01em;
   line-height: 1.3;
   margin: 0;
-  transition: color 0.2s;
-  font-variation-settings: 'opsz' 60;
 }
 
 html[lang='my'] .name {
   font-weight: 600;
   letter-spacing: 0;
-  font-size: 1.05rem;
+  font-size: 1.02rem;
+  line-height: 1.55;
 }
 
-.card:hover .name { color: var(--accent); }
-
 .price {
+  grid-area: price;
   display: inline-flex;
   align-items: baseline;
-  gap: 0.35rem;
-  margin-top: 0.2rem;
+  gap: 0.25rem;
+  background: var(--surface);
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  white-space: nowrap;
 }
 
 .priceValue {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--ink);
-  font-weight: 500;
+  font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
 
 .priceCurrency {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   color: var(--ink-soft);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .footer {
-  margin-top: 4rem;
+  margin-top: 3rem;
   display: flex;
   justify-content: center;
 }
@@ -266,51 +268,55 @@ html[lang='my'] .name {
 .viewAll {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink);
-  padding: 0.85rem 1.75rem;
-  border: 1px solid var(--ink);
+  gap: 0.55rem;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--on-primary);
+  background: var(--primary);
+  padding: 0.95rem 1.8rem;
   border-radius: 999px;
-  transition: background 0.25s, color 0.25s, gap 0.25s, border-color 0.25s;
+  box-shadow: var(--shadow-sm);
+  transition: background 0.25s, gap 0.25s, transform 0.2s;
 }
 
 .viewAll:hover {
-  background: var(--ink);
-  color: var(--warm-white);
-  gap: 0.85rem;
+  background: var(--primary-hover);
+  gap: 0.8rem;
+  transform: translateY(-2px);
 }
 
-/* Skeleton loading state */
+/* ── Skeleton loading state ───────────────────────────────────── */
 .skeleton {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
+  padding: 11px 11px 1rem;
+  border-radius: var(--radius-lg);
+  background: var(--bg-alt);
+}
+
+.skeletonImage,
+.skeletonLine {
+  background: linear-gradient(90deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.95) 50%, rgba(255,255,255,0.45) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
 }
 
 .skeletonImage {
   aspect-ratio: 4 / 5;
-  background: linear-gradient(90deg, var(--paper-soft) 0%, var(--paper-deep) 50%, var(--paper-soft) 100%);
-  background-size: 200% 100%;
-  animation: shimmer 1.6s infinite;
-  margin-bottom: 0.6rem;
-  border-radius: 2px;
+  margin-bottom: 0.5rem;
+  border-radius: var(--radius-md);
 }
 
 .skeletonLine {
   height: 12px;
-  background: linear-gradient(90deg, var(--paper-soft) 0%, var(--paper-deep) 50%, var(--paper-soft) 100%);
-  background-size: 200% 100%;
-  animation: shimmer 1.6s infinite;
-  border-radius: 2px;
+  border-radius: 999px;
+  margin-left: 0.5rem;
 }
 
 .skeletonLineSm { width: 30%; }
 .skeletonLineMd { width: 40%; }
-.skeletonLineLg { width: 75%; }
+.skeletonLineLg { width: 70%; }
 
 @keyframes shimmer {
   0%   { background-position: 200% 0; }
@@ -318,99 +324,62 @@ html[lang='my'] .name {
 }
 
 @media (max-width: 960px) {
-  .grid { grid-template-columns: repeat(2, 1fr); gap: 2.5rem 1.5rem; }
-  .header { margin-bottom: 3rem; }
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+  .header { margin-bottom: 2.25rem; }
 }
 
 @media (max-width: 600px) {
-  .section { padding: 4rem 0; }
+  .section { padding: 3.75rem 0 4.5rem; }
   .container { padding: 0 1rem; }
 
   .header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 1.25rem;
-    margin-bottom: 2rem;
-    padding-bottom: 1.1rem;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
   }
 
-  .headingGroup { gap: 0.55rem; }
   .title { font-size: clamp(1.65rem, 8vw, 2.05rem); }
 
   .grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.65rem 0.85rem;
+    gap: 0.8rem;
   }
 
-  .imageWrap {
-    margin-bottom: 0.8rem;
-    border-radius: 4px;
-  }
+  .card { padding: 7px; border-radius: var(--radius-md); }
+  .imageWrap { border-radius: var(--radius-sm); }
 
-  .imageWrap::after {
-    border-radius: 4px;
-  }
-
+  /* Stack name + price on narrow 2-up cards */
   .body {
-    gap: 0.25rem;
-    padding: 0;
+    grid-template-columns: 1fr;
+    grid-template-areas: 'cat' 'name' 'price';
+    row-gap: 0.2rem;
+    padding: 0.65rem 0.3rem 0.25rem;
   }
 
-  .category {
-    font-size: 0.58rem;
-    letter-spacing: 0.12em;
-    line-height: 1.25;
-  }
-
-  .name {
-    font-size: 0.96rem;
-    line-height: 1.28;
-  }
-
-  html[lang='my'] .name {
-    font-size: 0.88rem;
-    line-height: 1.5;
-  }
-
-  .price {
-    gap: 0.25rem;
-    margin-top: 0.1rem;
-    flex-wrap: wrap;
-  }
-
-  .priceValue { font-size: 0.84rem; }
-  .priceCurrency { font-size: 0.62rem; letter-spacing: 0.08em; }
+  .price { justify-self: start; margin-top: 0.3rem; padding: 0.3rem 0.65rem; }
+  .category { font-size: 0.68rem; }
+  .name { font-size: 0.98rem; }
+  html[lang='my'] .name { font-size: 0.88rem; line-height: 1.5; }
+  .priceValue { font-size: 0.82rem; }
+  .priceCurrency { font-size: 0.62rem; }
 
   .viewBadge {
-    left: auto;
-    right: 0.45rem;
-    bottom: 0.45rem;
-    transform: none;
     opacity: 1;
-    padding: 0.35rem 0.5rem;
-    gap: 0.3rem;
-    font-size: 0.58rem;
-    letter-spacing: 0.06em;
-  }
-
-  .viewBadge svg {
-    width: 10px;
-    height: 10px;
-  }
-
-  .card:hover .viewBadge {
     transform: none;
+    right: 0.4rem;
+    bottom: 0.4rem;
+    padding: 0.3rem 0.55rem;
+    font-size: 0.68rem;
   }
 
-  .footer { margin-top: 2.75rem; }
-  .viewAll { width: 100%; justify-content: center; padding: 0.78rem 1rem; }
+  .card:hover { transform: none; }
+
+  .footer { margin-top: 2.25rem; }
+  .viewAll { width: 100%; justify-content: center; }
 }
 
 @media (max-width: 380px) {
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 1.75rem;
-  }
+  .grid { grid-template-columns: 1fr; gap: 1rem; }
   .container { padding: 0 0.8rem; }
-  .viewBadge { display: none; }
 }

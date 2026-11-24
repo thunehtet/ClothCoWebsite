@@ -3,6 +3,7 @@ import styles from './Navbar.module.css'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useTenant } from '../TenantContext'
 import { safeUrl, isExternal } from '../utils/safeUrl'
+import { MoonIcon } from './Icons'
 
 const NAV_KEYS = [
   { key: 'nav.home',     href: '#home' },
@@ -11,13 +12,6 @@ const NAV_KEYS = [
   { key: 'nav.faq',      href: '#faq' },
   { key: 'nav.contact',  href: '#contact' },
 ]
-
-function initialsFrom(name) {
-  if (!name) return 'CC'
-  const parts = name.trim().split(/\s+/).slice(0, 2)
-  const letters = parts.map(p => p[0]).join('')
-  return (letters || name.slice(0, 2)).toUpperCase()
-}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -65,7 +59,7 @@ export default function Navbar() {
               decoding="async"
             />
           ) : (
-            <span className={styles.logoMark}>{initialsFrom(brandName)}</span>
+            <span className={styles.logoMark}><MoonIcon /></span>
           )}
           <span className={styles.logoText}>{brandName}</span>
         </a>

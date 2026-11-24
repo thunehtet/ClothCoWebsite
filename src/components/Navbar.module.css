@@ -2,138 +2,116 @@
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  padding: 1.4rem 0;
-  transition: background 0.35s ease, padding 0.35s ease, border-color 0.35s ease;
-  background: transparent;
-  border-bottom: 1px solid transparent;
+  padding: 1rem 1.5rem 0;
+  transition: padding 0.35s ease;
+  pointer-events: none; /* only the pill itself is interactive */
 }
 
-.scrolled {
-  background: rgba(251, 247, 240, 0.92);
-  backdrop-filter: blur(18px) saturate(120%);
-  -webkit-backdrop-filter: blur(18px) saturate(120%);
-  border-bottom-color: var(--rule-soft);
-  padding: 0.85rem 0;
-}
+.scrolled { padding-top: 0.6rem; }
 
-.menuOpen {
-  background: var(--warm-white);
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  border-bottom-color: var(--rule-soft);
-}
-
+/* The floating pill */
 .inner {
-  max-width: 1280px;
+  pointer-events: auto;
+  position: relative;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2.5rem;
+  padding: 0.45rem 0.5rem 0.45rem 0.9rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+  transition: background 0.35s ease, box-shadow 0.35s ease;
+}
+
+.scrolled .inner {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow-md);
+}
+
+/* backdrop-filter would make the fixed drawer position relative to the pill */
+.menuOpen .inner {
+  background: var(--surface);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .logo {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
-  gap: 0.85rem;
-  min-height: 60px;
-  transition: gap 0.3s ease;
+  gap: 0.6rem;
+  min-height: 44px;
 }
 
 .logoImage {
-  height: 56px;
+  height: 44px;
   width: auto;
-  max-width: 240px;
+  max-width: 200px;
   object-fit: contain;
-  transition: height 0.3s ease, opacity 0.2s;
+  transition: opacity 0.2s;
 }
-
-.scrolled .logo { min-height: 48px; }
-.scrolled .logoImage { height: 46px; }
 
 .logo:hover .logoImage { opacity: 0.85; }
 
 .logoMark {
-  width: 52px;
-  height: 52px;
-  background: var(--accent);
-  color: var(--warm-white);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: 1.2rem;
-  letter-spacing: 0.02em;
-  font-variation-settings: 'opsz' 144;
-  transition: width 0.3s ease, height 0.3s ease, font-size 0.3s ease;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--butter);
+  color: var(--primary);
+  display: grid;
+  place-items: center;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.scrolled .logoMark {
-  width: 44px;
-  height: 44px;
-  font-size: 1rem;
-}
+.logoMark svg { width: 20px; height: 20px; }
+.logo:hover .logoMark { transform: rotate(-18deg) scale(1.06); }
 
 .logoText {
   font-family: var(--font-display);
-  font-size: 1.55rem;
-  font-weight: 500;
+  font-size: 1.35rem;
+  font-weight: 600;
   color: var(--ink);
-  letter-spacing: -0.015em;
+  letter-spacing: -0.01em;
   line-height: 1;
-  font-variation-settings: 'opsz' 144;
-  transition: font-size 0.3s ease;
+  font-variation-settings: 'opsz' 72, 'SOFT' 100, 'WONK' 1;
 }
-
-.scrolled .logoText { font-size: 1.35rem; }
 
 html[lang='my'] .logoText {
-  font-weight: 600;
+  font-family: 'Fraunces', var(--font-display);
   letter-spacing: 0;
-  font-size: 1.35rem;
+  font-size: 1.25rem;
 }
-
-html[lang='my'] .scrolled .logoText { font-size: 1.2rem; }
 
 .nav {
   display: flex;
   align-items: center;
-  gap: 2.25rem;
+  gap: 1.75rem;
 }
 
 .link {
-  font-size: 0.86rem;
-  font-weight: 500;
-  color: var(--ink-mid);
-  letter-spacing: 0.02em;
-  transition: color 0.2s;
-  position: relative;
-  padding: 0.25rem 0;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  transition: color 0.2s, background 0.2s;
+  padding: 0.4rem 0.2rem;
+  border-radius: 999px;
 }
 
-.link::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0; right: 0;
-  height: 1px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.link:hover { color: var(--ink); }
-.link:hover::after { transform: scaleX(1); }
+.link:hover { color: var(--primary); }
 
 .langSwitch {
   display: inline-flex;
   align-items: stretch;
   padding: 3px;
-  background: var(--paper-soft);
-  border: 1px solid var(--rule-soft);
+  background: var(--bg-alt);
   border-radius: 999px;
   gap: 2px;
 }
@@ -143,163 +121,178 @@ html[lang='my'] .scrolled .logoText { font-size: 1.2rem; }
   align-items: center;
   justify-content: center;
   min-width: 2.4rem;
-  padding: 0.22rem 0.7rem;
+  padding: 0.25rem 0.75rem;
   border-radius: 999px;
-  font-size: 0.7rem;
-  font-weight: 600;
+  font-size: 0.76rem;
+  font-weight: 800;
   color: var(--ink-soft);
   background: transparent;
-  letter-spacing: 0.04em;
   transition: background 0.2s, color 0.2s;
-  line-height: 1.3;
+  line-height: 1.35;
 }
 
-.langBtn:hover { color: var(--accent); }
+.langBtn:hover { color: var(--primary); }
 
 .langActive {
-  background: var(--warm-white);
-  color: var(--accent);
-  box-shadow: 0 1px 2px rgba(31,26,20,0.06);
+  background: var(--surface);
+  color: var(--primary);
+  box-shadow: var(--shadow-sm);
 }
 
-.cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: var(--clay);
-  color: var(--warm-white);
-  padding: 0.6rem 1.15rem;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  border-radius: 999px;
-  transition: background 0.25s, color 0.25s, transform 0.2s;
-}
-
-.cta svg {
-  width: 15px;
-  height: 15px;
-  stroke-width: 1.6;
-}
-
-.cta:hover {
-  background: var(--clay-hover);
-  color: var(--warm-white);
-  transform: translateY(-1px);
-}
-
-/* Wraps the always-visible mobile shop button + hamburger (hidden on desktop) */
-.mobileActions {
-  display: none;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-/* Compact terracotta shop button that lives in the top bar on mobile */
+.cta,
 .ctaCompact {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  background: var(--clay);
-  color: var(--warm-white);
-  padding: 0.5rem 0.95rem;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  gap: 0.45rem;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-weight: 800;
   border-radius: 999px;
+  box-shadow: var(--shadow-sm);
   transition: background 0.25s, transform 0.2s;
 }
 
-.ctaCompact svg { width: 15px; height: 15px; stroke-width: 1.7; }
+.cta {
+  padding: 0.65rem 1.2rem;
+  font-size: 0.9rem;
+}
+
+.cta svg,
+.ctaCompact svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 1.8;
+}
+
+.cta:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+/* Always-visible mobile shop button + hamburger (hidden on desktop) */
+.mobileActions {
+  position: relative;
+  z-index: 2;
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.ctaCompact {
+  padding: 0.55rem 1rem;
+  font-size: 0.82rem;
+}
+
 .ctaCompact:active { transform: scale(0.97); }
 
-/* Full-width shop bar pinned to the bottom of the viewport on mobile */
+/* Floating shop pill pinned near the bottom of the viewport on mobile */
 .bottomBar {
   display: none;
   position: fixed;
   z-index: 98;
-  left: 0; right: 0; bottom: 0;
+  left: 1rem;
+  right: 1rem;
+  bottom: calc(0.85rem + env(safe-area-inset-bottom));
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
-  padding: 1rem 1.25rem calc(1rem + env(safe-area-inset-bottom));
-  background: var(--clay);
-  color: var(--warm-white);
-  font-size: 0.9rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  box-shadow: 0 -6px 24px rgba(31, 26, 20, 0.16);
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  gap: 0.55rem;
+  padding: 0.95rem 1.25rem;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-size: 0.98rem;
+  font-weight: 800;
+  border-radius: 999px;
+  box-shadow: 0 14px 30px -12px rgba(176, 72, 98, 0.65);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s;
 }
 
-.bottomBar svg { width: 18px; height: 18px; stroke-width: 1.7; }
+.bottomBar svg { width: 18px; height: 18px; stroke-width: 1.8; }
 
 /* Slide the bar away while the drawer is open so it doesn't sit over the menu */
-.bottomBarHidden { transform: translateY(100%); }
+.bottomBarHidden {
+  transform: translateY(160%);
+  opacity: 0;
+}
 
 .burger {
   display: none;
   flex-direction: column;
-  gap: 5px;
-  background: none;
-  padding: 4px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-alt);
 }
 
 .burger span {
   display: block;
-  width: 22px;
-  height: 1.5px;
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
   background: var(--ink);
   transition: transform 0.3s, opacity 0.3s;
 }
 
-.lineTop    { transform: translateY(6.5px) rotate(45deg); }
+.lineTop    { transform: translateY(6px) rotate(45deg); }
 .lineHide   { opacity: 0; }
-.lineBottom { transform: translateY(-6.5px) rotate(-45deg); }
+.lineBottom { transform: translateY(-6px) rotate(-45deg); }
 
 @media (max-width: 860px) {
-  .header {
-    padding: 0.85rem 0;
-  }
+  .header { padding: 0.75rem 0.75rem 0; }
+  .scrolled { padding-top: 0.5rem; }
 
-  .inner {
-    min-height: 48px;
-    padding: 0 1.25rem;
-  }
-
-  .logo {
-    min-height: 48px;
-  }
+  .inner { padding: 0.35rem 0.4rem 0.35rem 0.6rem; }
 
   .burger { display: flex; }
   .mobileActions { display: flex; }
   .bottomBar { display: flex; }
 
+  .logoMark { width: 36px; height: 36px; }
+  .logoText { font-size: 1.2rem; }
+  .logoImage { height: 34px; }
+
+  /* Full-screen drawer that sits under the floating pill */
   .nav {
     position: fixed;
-    z-index: 99;
-    top: 65px;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    min-height: calc(100dvh - 65px);
-    background: var(--warm-white);
+    z-index: 1;
+    inset: 0;
+    padding: 6.5rem 1.5rem 2rem;
+    min-height: 100dvh;
+    background:
+      radial-gradient(60% 40% at 85% 15%, var(--lavender), transparent 70%),
+      radial-gradient(60% 40% at 10% 90%, var(--butter), transparent 70%),
+      var(--bg);
     overflow-y: auto;
     flex-direction: column;
     justify-content: center;
-    gap: 2.5rem;
+    gap: 1.25rem;
     transform: translateX(100%);
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border-top: 1px solid var(--rule-soft);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.4s;
+    visibility: hidden;
   }
 
-  .nav.open { transform: translateX(0); }
-  .link { font-size: 1.1rem; }
-  /* The shop action now lives in the top bar + bottom bar, so hide the
-     redundant copy inside the drawer. */
+  .nav.open {
+    transform: translateX(0);
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  .link {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--ink);
+    padding: 0.35rem 1.25rem;
+  }
+
+  html[lang='my'] .link { font-size: 1.2rem; font-weight: 600; }
+
+  .link:hover { background: var(--surface); }
+
+  .langSwitch { margin-top: 1rem; }
+
+  /* The shop action lives in the top pill + bottom pill on mobile */
   .cta { display: none; }
-  .logoImage { height: 32px; }
 }

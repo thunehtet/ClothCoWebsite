@@ -5,40 +5,52 @@
 }
 
 :root {
-  /* Surfaces — warm, paper-like, slightly desaturated */
-  --paper:       #F4EFE6;
-  --paper-soft:  #ECE5D7;
-  --paper-deep:  #E3DACA;
-  --ivory:       #F8F4EC;
-  --warm-white:  #FBF7F0;
+  /* ── Soft Bedtime palette ─────────────────────────────────────── */
+  /* Surfaces */
+  --bg:          #FFF8F3;   /* milky cream page background */
+  --bg-alt:      #FDEFEF;   /* blush-tinted alternate section */
+  --surface:     #FFFFFF;
 
-  /* Ink — softer than pure black, reads as editorial */
-  --ink:         #1F1A14;
-  --ink-mid:     #4A3F33;
-  --ink-soft:    #7B6E5D;
-  --ink-faint:   #A89B86;
+  /* Ink — warm cocoa instead of black */
+  --ink:         #3D2E2E;
+  --ink-mid:     #5C4747;
+  --ink-soft:    #7A6464;
+  --ink-faint:   #B8A5A5;
 
-  /* Brand accent — deep botanical green */
-  --accent:       #2B5544;
-  --accent-hover: #1F4233;
-  --accent-soft:  #D9E3DC;
-  --accent-pale:  #EBF1EC;
+  /* Primary — berry rose (buttons, links, accents) */
+  --primary:       #C95C76;
+  --primary-hover: #B04862;
+  --on-primary:    #FFFFFF;
 
-  /* Secondary tone — earthen terracotta, now the primary CTA color */
-  --clay:         #B5664A;
-  --clay-hover:   #9C5238;
-  --clay-soft:    #E9D2C5;
+  /* Pastel set — each has a role, rotate through them */
+  --blush:     #F7D9DC;
+  --butter:    #FCEBB6;
+  --mint:      #D3EBDD;
+  --lavender:  #DDD8F3;
 
-  /* Lines & shadows */
-  --rule:        #D9CFBC;
-  --rule-soft:   #E8E0CF;
-  --shadow-sm:   0 1px 2px rgba(31,26,20,0.04);
-  --shadow-md:   0 8px 30px rgba(31,26,20,0.06);
-  --shadow-lg:   0 20px 60px rgba(31,26,20,0.10);
+  /* Night sky (footer) */
+  --night:     #2F2A4F;
+  --night-ink: #EDE9FF;
+  --star:      #FCEBB6;
+
+  /* Lines, shapes & shadows */
+  --rule:        #F0DCDC;
+  --rule-soft:   #F6E8E6;
+  --radius-sm:   14px;
+  --radius-md:   22px;
+  --radius-lg:   32px;
+  --shadow-sm:   0 6px 18px -10px rgba(120, 60, 75, 0.35);
+  --shadow-md:   0 14px 40px -18px rgba(120, 60, 75, 0.35);
+  --shadow-lg:   0 24px 60px -24px rgba(120, 60, 75, 0.45);
 
   /* Typography stacks */
   --font-display: 'Fraunces', 'Noto Sans Myanmar', ui-serif, Georgia, serif;
-  --font-body:    'DM Sans', 'Noto Sans Myanmar', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-body:    'Nunito', 'Noto Sans Myanmar', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* Legacy aliases — older names still resolve to the new palette */
+  --accent:       var(--primary);
+  --accent-hover: var(--primary-hover);
+  --warm-white:   var(--bg);
 
   /* Storefront handshake — kept for parity with StockEasy shop CSS */
   --forest:      #1F4233;
@@ -50,7 +62,7 @@
 /* Burmese: prefer Myanmar font for headings too, since Fraunces has no MM glyphs */
 html[lang='my'] {
   --font-display: 'Noto Sans Myanmar', 'Fraunces', ui-serif, Georgia, serif;
-  --font-body:    'Noto Sans Myanmar', 'DM Sans', system-ui, sans-serif;
+  --font-body:    'Noto Sans Myanmar', 'Nunito', system-ui, sans-serif;
 }
 
 html {
@@ -60,21 +72,28 @@ html {
 
 body {
   font-family: var(--font-body);
-  background: var(--warm-white);
+  background: var(--bg);
   color: var(--ink);
   line-height: 1.65;
-  font-weight: 400;
+  font-weight: 500;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
   line-height: 1.1;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.015em;
-  font-variation-settings: 'opsz' 96, 'SOFT' 50;
+  font-variation-settings: 'opsz' 120, 'SOFT' 100, 'WONK' 1;
+}
+
+/* Italic accent words inside headings */
+h1 em, h2 em {
+  font-style: italic;
+  color: var(--primary);
 }
 
 /* Burmese needs a touch more line-height and slightly heavier weight to feel right */
@@ -87,8 +106,14 @@ html[lang='my'] h4 {
   letter-spacing: 0;
 }
 
+html[lang='my'] h1 em,
+html[lang='my'] h2 em {
+  font-style: normal;
+}
+
 html[lang='my'] body {
   line-height: 1.75;
+  font-weight: 400;
 }
 
 img { max-width: 100%; display: block; }
@@ -105,17 +130,26 @@ button {
 a:focus-visible,
 button:focus-visible,
 summary:focus-visible {
-  outline: 3px solid var(--accent);
+  outline: 3px solid var(--primary);
   outline-offset: 4px;
-  border-radius: 4px;
+  border-radius: 12px;
 }
 
 ::selection {
-  background: var(--accent);
-  color: var(--warm-white);
+  background: var(--blush);
+  color: var(--ink);
 }
 
 /* Leave room for the pinned mobile shop bar so it never covers footer content */
 @media (max-width: 860px) {
-  body { padding-bottom: 4.75rem; }
+  body { padding-bottom: 5.25rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

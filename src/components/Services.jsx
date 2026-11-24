@@ -1,5 +1,6 @@
 import styles from './Services.module.css'
 import { useLanguage } from '../i18n/LanguageContext'
+import { StarIcon } from './Icons'
 
 const ITEMS = [
   {
@@ -43,7 +44,7 @@ export default function Services() {
       <div className={styles.container}>
         <header className={styles.header}>
           <p className={styles.eyebrow}>
-            <span className={styles.eyebrowMark} aria-hidden="true" />
+            <StarIcon className={styles.eyebrowMark} />
             {t('services.eyebrow')}
           </p>
           <h2 id="services-title" className={styles.title}>
