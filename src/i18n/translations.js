@@ -17,6 +17,11 @@ export const translations = {
       'Cloth Co is our own-brand pajama shop, selling mostly online through Facebook and our online store. Choose single pieces for everyday wear or wholesale orders for your shop, made with soft Padonmar cotton-like fabric.',
     'hero.cta.shop': 'Shop pajamas',
     'hero.cta.story': 'About Cloth Co',
+    'hero.badge.fabric': 'Soft Padonmar fabric',
+    'hero.badge.delivery': 'Delivery across Myanmar',
+    'hero.badge.cod': 'Cash on delivery',
+    'hero.sticker.big': '100%',
+    'hero.sticker.small': 'comfy',
 
     'products.eyebrow': 'In stock now',
     'products.title': 'Cute pajama sets for every day',
@@ -46,6 +51,8 @@ export const translations = {
 
     'faq.eyebrow': 'FAQ',
     'faq.title': 'Questions before you order.',
+    'faq.hint': 'Still curious?',
+    'faq.hintLink': 'Message us on Facebook',
     'faq.ordering.q': 'How do I place an order?',
     'faq.ordering.a': 'You can order through the Cloth Co Facebook page, Facebook Messenger, or directly from our online store. Send your size, color, quantity, name, phone number, and delivery address. For wholesale, include the designs and quantities you need.',
     'faq.delivery.q': 'Do you deliver outside Mudon?',
@@ -60,6 +67,7 @@ export const translations = {
     'footer.shopCta': 'Visit the shop',
     'footer.copy': '© {year} {brand}',
     'footer.poweredBy': 'Online shop powered by StockEasy',
+    'footer.goodnight': 'sweet dreams',
 
     'lang.en': 'EN',
     'lang.my': 'မြန်မာ',
@@ -79,6 +87,11 @@ export const translations = {
       'Cloth Co က ကိုယ်ပိုင် brand ချည်သားအထည်ဆိုင်ဖြစ်ပြီး Facebook နဲ့ online store ကနေ အများဆုံးရောင်းချပေးနေပါတယ်။ နေ့စဉ်ဝတ်ဖို့ တစ်ထည်ချင်း ဝယ်ယူနိုင်သလို ဆိုင်များအတွက် လက္ကားမှာယူနိုင်ပြီး ချည်သားလို ပေါ့ပါးနူးညံ့တဲ့ ပဒုံမာ ချည်သားနဲ့ ပြုလုပ်ထားပါတယ်။',
     'hero.cta.shop': 'ချည်သားအထည်များ ကြည့်မယ်',
     'hero.cta.story': 'Cloth Co အကြောင်း',
+    'hero.badge.fabric': 'နူးညံ့တဲ့ ပဒုံမာ ချည်သား',
+    'hero.badge.delivery': 'မြန်မာနိုင်ငံအနှံ့ ပို့ဆောင်',
+    'hero.badge.cod': 'ပစ္စည်းရောက်မှ ငွေချေ',
+    'hero.sticker.big': '100%',
+    'hero.sticker.small': 'သက်သောင့်သက်သာ',
 
     'products.eyebrow': 'လက်ရှိရနိုင်သော',
     'products.title': 'နေ့စဉ်ဝတ်ဖို့ ချစ်စရာ ချည်သားအထည်များ',
@@ -108,6 +121,8 @@ export const translations = {
 
     'faq.eyebrow': 'FAQ',
     'faq.title': 'မှာယူမခင် မေးလေ့ရှိတဲ့ မေးခွန်းများ',
+    'faq.hint': 'မေးစရာ ရှိသေးလား။',
+    'faq.hintLink': 'Facebook မှာ message ပို့မယ်',
     'faq.ordering.q': 'ဘယ်လို မှာယူရမလဲ။',
     'faq.ordering.a': 'Cloth Co Facebook page၊ Messenger သို့မဟုတ် online store ကနေ တိုက်ရိုက်မှာယူနိုင်ပါတယ်။ ဆိုဒ်၊ အရောင်၊ အရေအတွက်၊ နာမည်၊ ဖုန်းနံပါတ်နဲ့ ပို့ရမယ့် လိပ်စာကို ပေးပို့ပါ။ လက္ကားမှာယူချင်ပါက လိုချင်တဲ့ design နဲ့ အရေအတွက်ကိုပါ ပြောပေးပါ။',
     'faq.delivery.q': 'မုဒုံမြို့ပြင်ပကို ပို့ပေးပါသလား။',
@@ -122,6 +137,7 @@ export const translations = {
     'footer.shopCta': 'ဆိုင်ကို သွားမယ်',
     'footer.copy': '© {year} {brand}',
     'footer.poweredBy': 'အွန်လိုင်းဆိုင်ကို StockEasy နဲ့ ဖန်တီးထားပါတယ်',
+    'footer.goodnight': 'အိပ်မက်လှလှ မက်ပါစေ',
 
     'lang.en': 'EN',
     'lang.my': 'မြန်မာ',

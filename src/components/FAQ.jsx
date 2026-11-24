@@ -1,19 +1,38 @@
 import styles from './FAQ.module.css'
 import { useLanguage } from '../i18n/LanguageContext'
+import { useTenant } from '../TenantContext'
+import { safeUrl } from '../utils/safeUrl'
+import { StarIcon } from './Icons'
 
 const QUESTIONS = ['ordering', 'delivery', 'payment', 'fabric']
 
 export default function FAQ() {
   const { t } = useLanguage()
+  const { tenant } = useTenant()
 
   return (
     <section id="faq" className={styles.section} aria-labelledby="faq-title">
       <div className={styles.container}>
         <header className={styles.header}>
-          <p className={styles.eyebrow}>{t('faq.eyebrow')}</p>
+          <p className={styles.eyebrow}>
+            <StarIcon className={styles.eyebrowMark} />
+            {t('faq.eyebrow')}
+          </p>
           <h2 id="faq-title" className={styles.title}>
             {t('faq.title')}
           </h2>
+          {tenant?.facebookUrl && (
+            <p className={styles.hint}>
+              {t('faq.hint')}{' '}
+              <a
+                href={safeUrl(tenant.facebookUrl)}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t('faq.hintLink')} <span aria-hidden="true">→</span>
+              </a>
+            </p>
+          )}
         </header>
 
         <div className={styles.list}>

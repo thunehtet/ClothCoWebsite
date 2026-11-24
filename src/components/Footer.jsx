@@ -2,13 +2,7 @@ import styles from './Footer.module.css'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useTenant } from '../TenantContext'
 import { safeUrl } from '../utils/safeUrl'
-
-function initialsFrom(name) {
-  if (!name) return 'CC'
-  const parts = name.trim().split(/\s+/).slice(0, 2)
-  const letters = parts.map(p => p[0]).join('')
-  return (letters || name.slice(0, 2)).toUpperCase()
-}
+import { MoonIcon } from './Icons'
 
 export default function Footer() {
   const { t } = useLanguage()
@@ -19,6 +13,8 @@ export default function Footer() {
 
   return (
     <footer id="contact" className={styles.footer}>
+      <div className={styles.stars} aria-hidden="true" />
+      <MoonIcon className={styles.moon} />
       <div className={styles.container}>
         <div className={styles.top}>
           <div className={styles.brandBlock}>
@@ -33,7 +29,7 @@ export default function Footer() {
                 />
               ) : (
                 <>
-                  <span className={styles.logoMark}>{initialsFrom(brandName)}</span>
+                  <span className={styles.logoMark}><MoonIcon /></span>
                   <span className={styles.logoText}>{brandName}</span>
                 </>
               )}
@@ -102,7 +98,10 @@ export default function Footer() {
         </div>
 
         <div className={styles.bottom}>
-          <p className={styles.copy}>{t('footer.copy', { year, brand: brandName })}</p>
+          <p className={styles.copy}>
+            {t('footer.copy', { year, brand: brandName })}
+            <span className={styles.goodnight}> · {t('footer.goodnight')} ☾</span>
+          </p>
           <p className={styles.powered}>{t('footer.poweredBy')}</p>
         </div>
       </div>

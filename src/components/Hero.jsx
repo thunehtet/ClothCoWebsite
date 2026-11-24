@@ -3,6 +3,9 @@ import { useLanguage } from '../i18n/LanguageContext'
 import { useTenant } from '../TenantContext'
 import { COLLECTION_PHOTOS } from '../data/collectionPhotos'
 import { safeUrl, isExternal } from '../utils/safeUrl'
+import { StarIcon, MoonIcon } from './Icons'
+
+const BADGES = ['fabric', 'delivery', 'cod']
 
 export default function Hero() {
   const { t } = useLanguage()
@@ -19,10 +22,17 @@ export default function Hero() {
 
   return (
     <section id="home" className={`${styles.hero} ${hasGallery ? '' : styles.heroNoImage}`}>
+      <div className={styles.decor} aria-hidden="true">
+        <StarIcon className={`${styles.float} ${styles.s1}`} />
+        <StarIcon className={`${styles.float} ${styles.s2}`} />
+        <StarIcon className={`${styles.float} ${styles.s3}`} />
+        <MoonIcon className={`${styles.float} ${styles.moon}`} />
+      </div>
+
       <div className={styles.inner}>
         <div className={styles.content}>
           <p className={styles.eyebrow}>
-            <span className={styles.eyebrowMark} aria-hidden="true" />
+            <StarIcon className={styles.eyebrowMark} />
             {t('hero.eyebrow')}
           </p>
 
@@ -47,6 +57,15 @@ export default function Hero() {
               <span aria-hidden="true">→</span>
             </a>
           </div>
+
+          <ul className={styles.badges}>
+            {BADGES.map(id => (
+              <li key={id} className={`${styles.badge} ${styles[`badge_${id}`]}`}>
+                <span className={styles.badgeDot} aria-hidden="true" />
+                {t(`hero.badge.${id}`)}
+              </li>
+            ))}
+          </ul>
         </div>
 
         {hasGallery && (
@@ -73,8 +92,14 @@ export default function Hero() {
                 </a>
               ))}
             </div>
+            <div className={styles.sticker} aria-hidden="true">
+              <span>
+                <b>{t('hero.sticker.big')}</b>
+                {t('hero.sticker.small')}
+              </span>
+            </div>
             <figcaption className={styles.caption}>
-              <span className={styles.captionRule} aria-hidden="true" />
+              <MoonIcon className={styles.captionRule} />
               <span>{tenant?.tagline ?? t('hero.eyebrow')}</span>
             </figcaption>
           </figure>
